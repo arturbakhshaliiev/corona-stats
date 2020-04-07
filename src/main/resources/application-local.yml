@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/corona_db
+    username: corona_stats_admin
+    password: qweasdzxcQ123!
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+rapid-api:
+  apiHost: covid-19-data.p.rapidapi.com
+  apiKey: 220a3b6b59msha5166ba69e9b70ap19a323jsn1b437e74077d
+
+telegram:
+  botUserName: Covid19Covid19Bot
+  token: 1100678024:AAEkYl6zyUK13RNLBG9y0_KpujQLCLwR76I
+

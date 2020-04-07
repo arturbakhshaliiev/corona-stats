@@ -5,6 +5,7 @@ import com.example.coronastats.telegram.model.TelegramUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
@@ -29,25 +30,25 @@ public class TelegramInterfaceHelper {
                 .setCallbackData(Action.builder().name(actionName).build().getName());
     }
 
-    public String getGreetingText(TelegramUser user) {
+    public String getGreetingText(User user) {
         return String.format("%s %s, %s.\n"
                 + "%s " + "\n"
                 + "%s %s: %s.",
-                "\uD83D\uDC4B", getRb(user.getTelegramId()).getString("hello"), user.getFullName(),
-                getRb(user.getTelegramId()).getString("greeting"),
-                "\uD83D\uDC65", getRb(user.getTelegramId()).getString("users"),
+                "\uD83D\uDC4B", getRb(user).getString("hello"), user,
+                getRb(user).getString("greeting"),
+                "\uD83D\uDC65", getRb(user).getString("users"),
                 telegramUserService.getUsersCount());
     }
 
-    public InlineKeyboardButton getBackButton(Integer userId, String command) {
-        return getButton(" \uD83D\uDD19 " + getRb(userId).getString("back"), command);
+    public InlineKeyboardButton getBackButton(User user, String command) {
+        return getButton(" \uD83D\uDD19 " + getRb(user).getString("back"), command);
     }
 
-    public InlineKeyboardMarkup getBackKeyboard(Integer userId, String command) {
-        return new InlineKeyboardMarkup().setKeyboard(Arrays.asList(Arrays.asList(getBackButton(userId, command))));
+    public InlineKeyboardMarkup getBackKeyboard(User user, String command) {
+        return new InlineKeyboardMarkup().setKeyboard(Arrays.asList(Arrays.asList(getBackButton(user, command))));
     }
 
-    public InlineKeyboardMarkup getEuropeCountriesKeyboard(Integer userId) {
+    public InlineKeyboardMarkup getEuropeCountriesKeyboard(User user) {
         return new InlineKeyboardMarkup().setKeyboard(Arrays.asList(
                 Arrays.asList(getButton("\uD83C\uDDE6\uD83C\uDDFD Аландські острови", ALAND_ISLANDS),
                         getButton("\uD83C\uDDE6\uD83C\uDDF1 Албанія", ALBANIA)),
@@ -102,42 +103,42 @@ public class TelegramInterfaceHelper {
                 Arrays.asList(getButton("\uD83C\uDDFA\uD83C\uDDE6 Україна", UKRAINE),
                         getButton("\uD83C\uDDFB\uD83C\uDDE6 Ватикан", VATICAN)),
                 Arrays.asList(getButton("\uD83C\uDDED\uD83C\uDDF7 Хорватія", CROATIA)),
-                Arrays.asList(getBackButton(userId, START))));
+                Arrays.asList(getBackButton(user, START))));
     }
 
-    public InlineKeyboardMarkup getStartKeyboard(TelegramUser user) {
+    public InlineKeyboardMarkup getStartKeyboard(User user) {
         return new InlineKeyboardMarkup().setKeyboard(Arrays.asList(
-                Arrays.asList(getButton("\uD83D\uDC69\uD83C\uDFFB\u200D⚕ " + getRb(user.getTelegramId()).getString("who_info"), WHO_INFORMATION)),
-                Arrays.asList(getButton("\uD83C\uDDFA\uD83C\uDDE6 " + getRb(user.getTelegramId()).getString("ukraine"), UKRAINE),
-                        getButton("\uD83D\uDD14 " + getRb(user.getTelegramId()).getString("notifications"), NOTIFICATIONS)),
-                Arrays.asList(getButton("\uD83C\uDF0D " + getRb(user.getTelegramId()).getString("world"), WORLD),
-                        getButton("\uD83D\uDCF0 " + getRb(user.getTelegramId()).getString("news"), NEWS),
-                        getButton("\uD83E\uDDED " + getRb(user.getTelegramId()).getString("countries"), COUNTRIES)),
-                Arrays.asList(getButton("\uD83C\uDF10 " + getRb(user.getTelegramId()).getString("lang"), LANGUAGE),
-                        getButton("\uD83D\uDE37 " + getRb(user.getTelegramId()).getString("quarantine"), QUARANTINE),
-                        getButton("ℹ " + getRb(user.getTelegramId()).getString("about"), ABOUT))));
+                Arrays.asList(getButton("\uD83D\uDC69\uD83C\uDFFB\u200D⚕ " + getRb(user).getString("who_info"), WHO_INFORMATION)),
+                Arrays.asList(getButton("\uD83C\uDDFA\uD83C\uDDE6 " + getRb(user).getString("ukraine"), UKRAINE),
+                        getButton("\uD83D\uDD14 " + getRb(user).getString("notifications"), NOTIFICATIONS)),
+                Arrays.asList(getButton("\uD83C\uDF0D " + getRb(user).getString("world"), WORLD),
+                        getButton("\uD83D\uDCF0 " + getRb(user).getString("news"), NEWS),
+                        getButton("\uD83E\uDDED " + getRb(user).getString("countries"), COUNTRIES)),
+                Arrays.asList(getButton("\uD83C\uDF10 " + getRb(user).getString("lang"), LANGUAGE),
+                        getButton("\uD83D\uDE37 " + getRb(user).getString("quarantine"), QUARANTINE),
+                        getButton("ℹ " + getRb(user).getString("about"), ABOUT))));
     }
 
-    public InlineKeyboardMarkup getLanguageKeyboard(Integer userId) {
+    public InlineKeyboardMarkup getLanguageKeyboard(User user) {
         return new InlineKeyboardMarkup().setKeyboard(Arrays.asList(
                 Arrays.asList(getButton("\uD83C\uDDFA\uD83C\uDDE6 Українська", UKRAINIAN),
                         getButton("\uD83C\uDDF7\uD83C\uDDFA Русский", RUSSIAN),
                         getButton("\uD83C\uDDEC\uD83C\uDDE7 English", ENGLISH)),
-                Arrays.asList(getBackButton(userId, START))));
+                Arrays.asList(getBackButton(user, START))));
     }
 
-    public InlineKeyboardMarkup getContinentsKeyboard(Integer userId) {
+    public InlineKeyboardMarkup getContinentsKeyboard(User user) {
         return new InlineKeyboardMarkup().setKeyboard(Arrays.asList(
-                Arrays.asList(getButton("\uD83C\uDDEA\uD83C\uDDFA " + getRb(userId).getString("europe"), EUROPE),
-                        getButton("\uD83C\uDDE8\uD83C\uDDF3 " + getRb(userId).getString("asia"), ASIA)),
-                Arrays.asList(getButton("\uD83C\uDDFA\uD83C\uDDF8 " + getRb(userId).getString("north_america"), NORTH_AMERICA),
-                        getButton("\uD83C\uDDE7\uD83C\uDDF7 " + getRb(userId).getString("south_america"), SOUTH_AMERICA)),
-                Arrays.asList(getButton("\uD83C\uDDFF\uD83C\uDDE6 " + getRb(userId).getString("africa"), AFRICA),
-                        getButton("\uD83C\uDDE6\uD83C\uDDFA " + getRb(userId).getString("australia"), AUSTRALIA_AND_OCEANIA)),
-                Arrays.asList(getBackButton(userId, START))));
+                Arrays.asList(getButton("\uD83C\uDDEA\uD83C\uDDFA " + getRb(user).getString("europe"), EUROPE),
+                        getButton("\uD83C\uDDE8\uD83C\uDDF3 " + getRb(user).getString("asia"), ASIA)),
+                Arrays.asList(getButton("\uD83C\uDDFA\uD83C\uDDF8 " + getRb(user).getString("north_america"), NORTH_AMERICA),
+                        getButton("\uD83C\uDDE7\uD83C\uDDF7 " + getRb(user).getString("south_america"), SOUTH_AMERICA)),
+                Arrays.asList(getButton("\uD83C\uDDFF\uD83C\uDDE6 " + getRb(user).getString("africa"), AFRICA),
+                        getButton("\uD83C\uDDE6\uD83C\uDDFA " + getRb(user).getString("australia"), AUSTRALIA_AND_OCEANIA)),
+                Arrays.asList(getBackButton(user, START))));
     }
 
-    public ResourceBundle getRb(Integer telegramId) {
-        return ResourceBundle.getBundle("messages", new Locale(telegramUserService.getUser(telegramId).getLocale()));
+    public ResourceBundle getRb(User user) {
+        return ResourceBundle.getBundle("messages", new Locale(telegramUserService.initUser(user).getLocale()));
     }
 }

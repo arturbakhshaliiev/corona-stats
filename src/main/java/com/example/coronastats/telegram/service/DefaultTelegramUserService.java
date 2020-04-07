@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.objects.User;
 
-import java.util.function.Supplier;
-
 @Slf4j
 @Service
 public class DefaultTelegramUserService implements TelegramUserService {

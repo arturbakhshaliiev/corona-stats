@@ -18,10 +18,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static com.example.coronastats.telegram.bot.Actions.*;
 
@@ -85,7 +82,7 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
             countriesButtonCallback(update);
         } else if (EUROPE.equals(query)) {
             europeButtonCallback(update);
-        } else if (List.of(ALAND_ISLANDS, ALBANIA, ANDORRA, AUSTRIA, BELARUS, BELGIUM, BOSNIA_AND_HERZEGOVINA, BULGARIA,
+        } else if (Arrays.asList(ALAND_ISLANDS, ALBANIA, ANDORRA, AUSTRIA, BELARUS, BELGIUM, BOSNIA_AND_HERZEGOVINA, BULGARIA,
                 CHANNEL_ISLANDS, CROATIA, CYPRUS, CZECHIA, ESTONIA, FAEROE_ISLANDS, FALKLAND_ISLANDS, FINLAND, FRANCE,
                 GERMANY, GIBRALTAR, GREECE, GREENLAND, GUERNSEY, HUNGARY, ICELAND, IRELAND, ISLE_OF_MAN, ITALY, JERSEY,
                 LATVIA, LIECHTENSTEIN, LITHUANIA, LUXEMBOURG, MALTA, MOLDOVA, MONACO, MONTENEGRO, NETHERLANDS,
@@ -96,7 +93,7 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
             countryButtonCallback(update);
         } else if (LANGUAGE.equals(query)) {
             languageButtonCallback(update);
-        } else if (List.of(UKRAINIAN, RUSSIAN, ENGLISH).stream().anyMatch(language -> language.equals(query))) {
+        } else if (Arrays.asList(UKRAINIAN, RUSSIAN, ENGLISH).stream().anyMatch(language -> language.equals(query))) {
             telegramUserService.changeLocale(update.getCallbackQuery().getFrom().getId(), query.substring(1));
             startButtonCallback(update);
         }
@@ -174,5 +171,4 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
     public String getBotToken() {
         return botToken;
     }
-
 }

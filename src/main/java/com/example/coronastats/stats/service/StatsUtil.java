@@ -65,7 +65,7 @@ public class StatsUtil {
                 .toString();
     }
 
-    private static ConcurrentHashMap<String, String> countryNames = new ConcurrentHashMap<>() {
+    private static ConcurrentHashMap<String, String> countryNames = new ConcurrentHashMap<String, String>() {
         {
             put(ALAND_ISLANDS, "Aland Islands");
             put(ALBANIA, "Albania");

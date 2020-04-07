@@ -23,10 +23,6 @@ public class BotInitializer {
     @Autowired
     private CoronaStatsBot coronaStatsBot;
 
-    static {
-        ApiContextInitializer.init();
-    }
-
     @PostConstruct
     private void setup() {
         try {

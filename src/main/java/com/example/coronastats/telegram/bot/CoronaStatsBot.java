@@ -26,7 +26,6 @@ import java.util.ResourceBundle;
 
 import static com.example.coronastats.telegram.bot.Actions.*;
 
-
 @Slf4j
 @Component
 public final class CoronaStatsBot extends TelegramLongPollingBot {

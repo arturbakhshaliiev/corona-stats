@@ -34,7 +34,7 @@ public class TelegramInterfaceHelper {
         return String.format("%s %s, %s.\n"
                 + "%s " + "\n"
                 + "%s %s: %s.",
-                "\uD83D\uDC4B", getRb(user).getString("hello"), user,
+                "\uD83D\uDC4B", getRb(user).getString("hello"), user.getFirstName(),
                 getRb(user).getString("greeting"),
                 "\uD83D\uDC65", getRb(user).getString("users"),
                 telegramUserService.getUsersCount());

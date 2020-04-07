@@ -19,7 +19,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 import static com.example.coronastats.telegram.bot.Actions.*;
 
@@ -88,13 +91,11 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
                 GERMANY, GIBRALTAR, GREECE, GREENLAND, GUERNSEY, HUNGARY, ICELAND, IRELAND, ISLE_OF_MAN, ITALY, JERSEY,
                 LATVIA, LIECHTENSTEIN, LITHUANIA, LUXEMBOURG, MALTA, MOLDOVA, MONACO, MONTENEGRO, NETHERLANDS,
                 NORTH_MACEDONIA, NORWAY, POLAND, PORTUGAL, RUSSIA, SAN_MARINO, SERBIA, SLOVAKIA, SLOVENIA, SPAIN,
-                SVALBARD, SWEDEN, SWITZERLAND, UK, UKRAINE, VATICAN)
-                .stream()
-                .anyMatch(country -> country.equals(query))) {
+                SVALBARD, SWEDEN, SWITZERLAND, UK, UKRAINE, VATICAN).contains(query)) {
             countryButtonCallback(update);
         } else if (LANGUAGE.equals(query)) {
             languageButtonCallback(update);
-        } else if (Arrays.asList(UKRAINIAN, RUSSIAN, ENGLISH).stream().anyMatch(language -> language.equals(query))) {
+        } else if (Arrays.asList(UKRAINIAN, RUSSIAN, ENGLISH).contains(query)) {
             telegramUserService.changeLocale(update.getCallbackQuery().getFrom().getId(), query.substring(1));
             startButtonCallback(update);
         }

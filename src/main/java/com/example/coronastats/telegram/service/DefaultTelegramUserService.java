@@ -38,13 +38,13 @@ public class DefaultTelegramUserService implements TelegramUserService {
                 .telegramId(user.getId())
                 .username(user.getUserName())
                 .fullName(user.getFirstName() + " " + user.getLastName())
-                .locale(user.getLanguageCode())
+                .locale(user.getLanguageCode() != null ? user.getLanguageCode() : "ua")
                 .build());
     }
 
     @Transactional
     @Override
-    public TelegramUser changeLocale(Integer telegramId, String locale) throws Exception {
+    public TelegramUser changeLocale(Integer telegramId, String locale) {
         TelegramUser user = telegramUserRepository.findByTelegramId(telegramId);
         if (user == null) {
             throw new IllegalArgumentException("User is not in database.");

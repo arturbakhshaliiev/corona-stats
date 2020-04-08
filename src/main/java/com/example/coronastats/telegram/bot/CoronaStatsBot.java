@@ -1,9 +1,9 @@
 package com.example.coronastats.telegram.bot;
 
 
+import com.example.coronastats.common.util.LogUtil;
 import com.example.coronastats.stats.service.StatsService;
 import com.example.coronastats.stats.service.StatsUtil;
-import com.example.coronastats.telegram.bot.dto.Action;
 import com.example.coronastats.telegram.model.TelegramUser;
 import com.example.coronastats.telegram.service.TelegramInterfaceHelper;
 import com.example.coronastats.telegram.service.TelegramUserService;
@@ -21,7 +21,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static com.example.coronastats.telegram.bot.Actions.*;
@@ -68,7 +67,7 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
 
     private void startCommandCallback(Update update) throws TelegramApiException {
         User user = update.getMessage().getFrom();
-        logger.info("Telegram Bot command success. User {}. Command {}", user, update.getMessage());
+        LogUtil.logAction(logger, user, update.getMessage().getText());
         TelegramUser telegramUser = telegramUserService.initUser(update.getMessage().getFrom());
         execute(new SendMessage().setChatId(update.getMessage().getChatId())
                 .setText(telegramInterfaceHelper.getGreetingText(user))
@@ -102,7 +101,7 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
 
     private void startButtonCallback(Update update) throws TelegramApiException {
         User user = update.getCallbackQuery().getFrom();
-        logger.info("Telegram Bot command success. User {}. Command {}", user, update.getCallbackQuery().getData());
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
         TelegramUser telegramUser = telegramUserService.initUser(update.getCallbackQuery().getFrom());
         execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
                 .setText(telegramInterfaceHelper.getGreetingText(user))
@@ -111,8 +110,7 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
 
     private void worldButtonCallback(Update update) throws TelegramApiException, UnirestException {
         User user = update.getCallbackQuery().getFrom();
-        logger.info("Telegram Bot command success. User {}. Command {}", user,
-                Optional.ofNullable(Action.builder().build(update)).map(Action::getName).orElse(""));
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
         String messageText = StatsUtil.formatTotalStats(getRb(user), statsService.getDetailedTotalStats());
         execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
                 .setText(messageText)
@@ -121,9 +119,7 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
 
     private void countriesButtonCallback(Update update) throws TelegramApiException {
         User user = update.getCallbackQuery().getFrom();
-        logger.info("Telegram Bot command success. User {}. Command {}",
-                update.getCallbackQuery().getFrom().getUserName(),
-                Optional.ofNullable(Action.builder().build(update)).map(Action::getName).orElse(""));
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
         execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
                 .setText(getRb(user).getString("countries"))
                 .setReplyMarkup(telegramInterfaceHelper.getContinentsKeyboard(user)));
@@ -131,8 +127,7 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
 
     private void europeButtonCallback(Update update) throws TelegramApiException {
         User user = update.getCallbackQuery().getFrom();
-        logger.info("Telegram Bot command success. User {}. Command {}", user,
-                Optional.ofNullable(Action.builder().build(update)).map(Action::getName).orElse(""));
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
         execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
                 .setText(telegramInterfaceHelper.getRb(user).getString("countries"))
                 .setReplyMarkup(telegramInterfaceHelper.getEuropeCountriesKeyboard(user)));
@@ -141,8 +136,8 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
 
     private void countryButtonCallback(Update update) throws TelegramApiException, UnirestException {
         User user = update.getCallbackQuery().getFrom();
-        String action = Optional.ofNullable(Action.builder().build(update)).map(Action::getName).orElse("");
-        logger.info("Telegram Bot command success. User {}. Command {}", user, action);
+        String action = update.getCallbackQuery().getData();
+        LogUtil.logAction(logger, user, action);
         String messageText = StatsUtil.formatCountryStats(getRb(user), statsService
                 .getDetailedCountryStats(StatsUtil.getCountryName(action)));
         execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
@@ -152,8 +147,7 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
 
     private void languageButtonCallback(Update update) throws TelegramApiException {
         User user = update.getCallbackQuery().getFrom();
-        logger.info("Telegram Bot command success. User {}. Command {}", user,
-                Optional.ofNullable(Action.builder().build(update)).map(Action::getName).orElse(""));
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
         execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
                 .setText(getRb(user).getString("lang.choose"))
                 .setReplyMarkup(telegramInterfaceHelper.getLanguageKeyboard(user)));

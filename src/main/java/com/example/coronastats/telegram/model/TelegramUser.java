@@ -37,8 +37,16 @@ public class TelegramUser {
     @Column(name = "updated", nullable = false)
     private Date updated;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastActionTime;
+
     @PrePersist
     protected void onCreate() {
-        updated = created = new Date();
+        lastActionTime = updated = created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        lastActionTime = updated = new Date();
     }
 }

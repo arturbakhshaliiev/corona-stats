@@ -32,7 +32,10 @@ public class DefaultTelegramUserService implements TelegramUserService {
             if (!fullNme.equals(dbUser.getFullName())) {
                 dbUser.setFullName(fullNme);
             }
-            return dbUser;
+            if (dbUser.getLocale() == null) {
+                dbUser.setLocale("ua");
+            }
+            return telegramUserRepository.save(dbUser);
         }
         return telegramUserRepository.save(TelegramUser.builder()
                 .telegramId(user.getId())

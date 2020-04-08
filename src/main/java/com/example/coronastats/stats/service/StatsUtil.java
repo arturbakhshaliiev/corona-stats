@@ -40,10 +40,10 @@ public class StatsUtil {
 
     public static String formatCountryStats(ResourceBundle rb, DetailedCountryStats stats) {
         return String.format("%s %s\n\n" +
-                        "%s" + ": %s\n\n" +
-                        "%s" + ": %s (%s%% %s)\n\n" +
-                        "%s" + ": %s\n\n" +
-                        "%s" + ": %s (%s%% %s, %s%% %s)\n\n",
+                        "%s" + rb.getString("sick") + ": %s\n\n" +
+                        "%s" + rb.getString("recovered") + ": %s (%s%% %s)\n\n" +
+                        "%s" + rb.getString("critical") + ": %s\n\n" +
+                        "%s" + rb.getString("deaths") + ": %s (%s%% %s, %s%% %s)\n\n",
                 "\uD83D\uDD0D ", stats.getCountry(),
                 "\uD83C\uDF21 ", toSpaceNumber(stats.getConfirmed()),
                 "✅ ", toSpaceNumber(stats.getRecovered()),

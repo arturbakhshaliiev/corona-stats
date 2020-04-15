@@ -70,7 +70,7 @@ public class Actions {
     public static final String COSTA_RICA = "/costa-rica";
     public static final String CROATIA = "/croatia";
     public static final String CUBA = "/cuba";
-    public static final String CURAÇAO = "/curaçao";
+    public static final String CURACAO = "/curaçao";
     public static final String CYPRUS = "/cyprus";
     public static final String CZECHIA = "/czechia";
     public static final String DENMARK = "/denmark";
@@ -167,7 +167,7 @@ public class Actions {
     public static final String MOZAMBIQUE = "/mozambique";
     public static final String MS_ZAANDAM = "/ms-zaandam";
     public static final String MYANMAR = "/myanmar";
-    public static final String N_KOREA = "/n-korea";
+    public static final String NORTH_KOREA = "/north-korea";
     public static final String NAMIBIA = "/namibia";
     public static final String NAURU = "/nauru";
     public static final String NEPAL = "/nepal";
@@ -200,7 +200,7 @@ public class Actions {
     public static final String ROMANIA = "/romania";
     public static final String RUSSIA = "/russia";
     public static final String RWANDA = "/rwanda";
-    public static final String S_KOREA = "/s-korea";
+    public static final String SOUTH_KOREA = "/south-korea";
     public static final String SAINT_HELENA_ASCENSION_AND_TRISTAN_DA_CUNHA = "/saint-helena-ascension-and-tristan-da-cunha";
     public static final String SAINT_KITTS_AND_NEVIS = "/saint-kitts-and-nevis";
     public static final String SAINT_LUCIA = "/saint-lucia";

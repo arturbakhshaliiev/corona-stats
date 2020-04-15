@@ -2,13 +2,11 @@ package com.example.coronastats.stats.service;
 
 import com.example.coronastats.stats.service.dto.DetailedCountryStats;
 import com.example.coronastats.stats.service.dto.DetailedTotalStats;
-import com.example.coronastats.telegram.bot.Actions;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.util.StringUtils;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -67,13 +65,13 @@ public class StatsUtil {
                         BRITISH_INDIAN_OCEAN_TERRITORY, BRUNEI, CAMBODIA, CHINA, CHRISTMAS_ISLAND,
                         COCOS_KEELING_ISLANDS, GEORGIA, HONG_KONG, INDIA, INDONESIA, IRAN, IRAQ, ISRAEL, JAPAN, JORDAN,
                         KAZAKHSTAN, KUWAIT, KYRGYZSTAN, LAOS, LEBANON, MACAO, MALAYSIA, MALDIVES, MONGOLIA, MYANMAR,
-                        NEPAL, N_KOREA, OMAN, PAKISTAN, PALESTINE, PHILIPPINES, QATAR, SAUDI_ARABIA, SINGAPORE,
-                        S_KOREA, SRI_LANKA, SYRIA, TAIWAN, TAJIKISTAN, THAILAND, TURKEY, TURKMENISTAN, UAE, UZBEKISTAN,
+                        NEPAL, NORTH_KOREA, OMAN, PAKISTAN, PALESTINE, PHILIPPINES, QATAR, SAUDI_ARABIA, SINGAPORE,
+                        SOUTH_KOREA, SRI_LANKA, SYRIA, TAIWAN, TAJIKISTAN, THAILAND, TURKEY, TURKMENISTAN, UAE, UZBEKISTAN,
                         VIETNAM, YEMEN).contains(countryAction)
                 ? ASIA :
                 Arrays.asList(ANGUILLA, ANTIGUA_AND_BARBUDA, ARUBA, BAHAMAS, BARBADOS, BELIZE, BERMUDA,
                         BONAIRE_SINT_EUSTATIUS_AND_SABA, BRITISH_VIRGIN_ISLANDS, CANADA, CAYMAN_ISLANDS, COSTA_RICA,
-                        CUBA, CURAÇAO, DOMINICA, DOMINICAN_REPUBLIC, EL_SALVADOR, GREENLAND, GRENADA, GUADELOUPE,
+                        CUBA, CURACAO, DOMINICA, DOMINICAN_REPUBLIC, EL_SALVADOR, GREENLAND, GRENADA, GUADELOUPE,
                         GUATEMALA, HAITI, HONDURAS, JAMAICA, MARTINIQUE, MEXICO, MONTSERRAT, NICARAGUA, PANAMA,
                         PUERTO_RICO, ST_BARTH, SAINT_KITTS_AND_NEVIS, SAINT_LUCIA, SAINT_MARTIN,
                         SAINT_PIERRE_AND_MIQUELON, ST_VINCENT_GRENADINES, SINT_MAARTEN, TRINIDAD_AND_TOBAGO,
@@ -175,7 +173,7 @@ public class StatsUtil {
             put(COSTA_RICA, "Costa Rica");
             put(CROATIA, "Croatia");
             put(CUBA, "Cuba");
-            put(CURAÇAO, "Curaçao");
+            put(CURACAO, "Curaçao");
             put(CYPRUS, "Cyprus");
             put(CZECHIA, "Czechia");
             put(DENMARK, "Denmark");
@@ -272,7 +270,7 @@ public class StatsUtil {
             put(MOZAMBIQUE, "Mozambique");
             put(MS_ZAANDAM, "MS Zaandam");
             put(MYANMAR, "Myanmar");
-            put(N_KOREA, "N. Korea");
+            put(NORTH_KOREA, "North Korea");
             put(NAMIBIA, "Namibia");
             put(NAURU, "Nauru");
             put(NEPAL, "Nepal");
@@ -305,7 +303,7 @@ public class StatsUtil {
             put(ROMANIA, "Romania");
             put(RUSSIA, "Russia");
             put(RWANDA, "Rwanda");
-            put(S_KOREA, "S. Korea");
+            put(SOUTH_KOREA, "S. Korea");
             put(SAINT_HELENA_ASCENSION_AND_TRISTAN_DA_CUNHA, "Saint Helena, Ascension and Tristan da Cunha");
             put(SAINT_KITTS_AND_NEVIS, "Saint Kitts and Nevis");
             put(SAINT_LUCIA, "Saint Lucia");

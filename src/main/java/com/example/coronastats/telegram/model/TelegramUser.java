@@ -13,7 +13,6 @@ import java.util.Date;
 @TableGenerator(name = "telegram_sequence", table = "hibernate_user_sequences", pkColumnValue = "telegram_user",
         initialValue = 1, allocationSize = 1)
 @Data @AllArgsConstructor @NoArgsConstructor @Builder(toBuilder = true)
-
 public class TelegramUser {
 
     @Id

@@ -84,12 +84,9 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
             countriesButtonCallback(update);
         } else if (EUROPE.equals(query)) {
             europeButtonCallback(update);
-        } else if (Arrays.asList(ALAND_ISLANDS, ALBANIA, ANDORRA, AUSTRIA, BELARUS, BELGIUM, BOSNIA_AND_HERZEGOVINA, BULGARIA,
-                CHANNEL_ISLANDS, CROATIA, CYPRUS, CZECHIA, ESTONIA, FAEROE_ISLANDS, FALKLAND_ISLANDS, FINLAND, FRANCE,
-                GERMANY, GIBRALTAR, GREECE, GREENLAND, GUERNSEY, HUNGARY, ICELAND, IRELAND, ISLE_OF_MAN, ITALY, JERSEY,
-                LATVIA, LIECHTENSTEIN, LITHUANIA, LUXEMBOURG, MALTA, MOLDOVA, MONACO, MONTENEGRO, NETHERLANDS,
-                NORTH_MACEDONIA, NORWAY, POLAND, PORTUGAL, RUSSIA, SAN_MARINO, SERBIA, SLOVAKIA, SLOVENIA, SPAIN,
-                SVALBARD, SWEDEN, SWITZERLAND, UK, UKRAINE, VATICAN).contains(query)) {
+        } else if (ASIA.equals(query)) {
+            asiaButtonCallback(update);
+        } else if (StatsUtil.isCountry(query)) {
             countryButtonCallback(update);
         } else if (LANGUAGE.equals(query)) {
             languageButtonCallback(update);
@@ -131,6 +128,15 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
         execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
                 .setText(telegramInterfaceHelper.getRb(user).getString("countries"))
                 .setReplyMarkup(telegramInterfaceHelper.getEuropeCountriesKeyboard(user)));
+
+    }
+
+    private void asiaButtonCallback(Update update) throws TelegramApiException {
+        User user = update.getCallbackQuery().getFrom();
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
+        execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
+                .setText(telegramInterfaceHelper.getRb(user).getString("countries"))
+                .setReplyMarkup(telegramInterfaceHelper.getAsiaCountriesKeyboard(user)));
 
     }
 

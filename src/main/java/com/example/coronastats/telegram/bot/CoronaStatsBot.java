@@ -210,7 +210,7 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
         User user = update.getCallbackQuery().getFrom();
         LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
         execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
-                .setText(getRb(user).getString("about") + "\n" + "\uD83D\uDE0A")
+                .setText(getRb(user).getString("about_text") + "\n" + "\uD83D\uDE0A")
                 .setReplyMarkup(telegramInterfaceHelper.getBackKeyboard(user, START)));
     }
 

@@ -101,6 +101,8 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
         } else if (Arrays.asList(UKRAINIAN, RUSSIAN, ENGLISH).contains(query)) {
             telegramUserService.changeLocale(update.getCallbackQuery().getFrom().getId(), query.substring(1));
             startButtonCallback(update);
+        } else if (ABOUT.equals(query)) {
+            aboutButtonCallback(update);
         }
     }
 
@@ -201,6 +203,15 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
         execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
                 .setText(getRb(user).getString("lang.choose"))
                 .setReplyMarkup(telegramInterfaceHelper.getLanguageKeyboard(user)));
+    }
+
+
+    private void aboutButtonCallback(Update update) throws TelegramApiException {
+        User user = update.getCallbackQuery().getFrom();
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
+        execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
+                .setText(getRb(user).getString("about") + "\n" + "\uD83D\uDE0A")
+                .setReplyMarkup(telegramInterfaceHelper.getBackKeyboard(user, START)));
     }
 
     private ResourceBundle getRb(User user) {

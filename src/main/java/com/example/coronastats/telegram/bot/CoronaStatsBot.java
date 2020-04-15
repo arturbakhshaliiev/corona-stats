@@ -86,6 +86,14 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
             europeButtonCallback(update);
         } else if (ASIA.equals(query)) {
             asiaButtonCallback(update);
+        } else if (NORTH_AMERICA.equals(query)) {
+            northAmericaButtonCallback(update);
+        } else if (SOUTH_AMERICA.equals(query)) {
+            southAmericaButtonCallback(update);
+        } else if (AFRICA.equals(query)) {
+            africaButtonCallback(update);
+        } else if (AUSTRALIA_AND_OCEANIA.equals(query)) {
+            australiaAndOceaniaButtonCallback(update);
         } else if (StatsUtil.isCountry(query)) {
             countryButtonCallback(update);
         } else if (LANGUAGE.equals(query)) {
@@ -140,6 +148,42 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
 
     }
 
+    private void northAmericaButtonCallback(Update update) throws TelegramApiException {
+        User user = update.getCallbackQuery().getFrom();
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
+        execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
+                .setText(telegramInterfaceHelper.getRb(user).getString("countries"))
+                .setReplyMarkup(telegramInterfaceHelper.getNorthAmericaCountriesKeyboard(user)));
+
+    }
+
+    private void southAmericaButtonCallback(Update update) throws TelegramApiException {
+        User user = update.getCallbackQuery().getFrom();
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
+        execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
+                .setText(telegramInterfaceHelper.getRb(user).getString("countries"))
+                .setReplyMarkup(telegramInterfaceHelper.getSouthAmericaCountriesKeyboard(user)));
+
+    }
+
+    private void africaButtonCallback(Update update) throws TelegramApiException {
+        User user = update.getCallbackQuery().getFrom();
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
+        execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
+                .setText(telegramInterfaceHelper.getRb(user).getString("countries"))
+                .setReplyMarkup(telegramInterfaceHelper.getAfricaCountriesKeyboard(user)));
+
+    }
+
+    private void australiaAndOceaniaButtonCallback(Update update) throws TelegramApiException {
+        User user = update.getCallbackQuery().getFrom();
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
+        execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
+                .setText(telegramInterfaceHelper.getRb(user).getString("countries"))
+                .setReplyMarkup(telegramInterfaceHelper.getAustraliaAndOceaniaCountriesKeyboard(user)));
+
+    }
+
     private void countryButtonCallback(Update update) throws TelegramApiException, UnirestException {
         User user = update.getCallbackQuery().getFrom();
         String action = update.getCallbackQuery().getData();
@@ -148,7 +192,7 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
                 .getDetailedCountryStats(StatsUtil.getCountryName(action)));
         execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
                 .setText(messageText)
-                .setReplyMarkup(telegramInterfaceHelper.getBackKeyboard(user, EUROPE)));
+                .setReplyMarkup(telegramInterfaceHelper.getBackKeyboard(user, StatsUtil.getContinent(action))));
     }
 
     private void languageButtonCallback(Update update) throws TelegramApiException {

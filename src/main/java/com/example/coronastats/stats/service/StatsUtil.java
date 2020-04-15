@@ -11,6 +11,7 @@ import lombok.Data;
 import org.springframework.util.StringUtils;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -52,6 +53,49 @@ public class StatsUtil {
                 "\uD83C\uDF97 ", toSpaceNumber(stats.getDeaths()),
                 CUTTED_DECIMAL_FORMAT.format(stats.getDeathsFromTotalPercentage()), rb.getString("from_all_cases"),
                 CUTTED_DECIMAL_FORMAT.format(stats.getDeathsFromClosedPercentage()), rb.getString("from_closed_cases"));
+    }
+
+    public static String getContinent(String countryAction) {
+        return Arrays.asList(ALAND_ISLANDS, ALBANIA, ANDORRA, AUSTRIA, BELARUS, BELGIUM, BOSNIA_AND_HERZEGOVINA,
+                BULGARIA, CROATIA, CYPRUS, CZECHIA, DENMARK, ESTONIA, FAEROE_ISLANDS, FINLAND, FRANCE, GERMANY,
+                GIBRALTAR, GREECE, GUERNSEY, HUNGARY, ICELAND, IRELAND, ISLE_OF_MAN, ITALY, JERSEY, LATVIA,
+                LIECHTENSTEIN, LITHUANIA, LUXEMBOURG, NORTH_MACEDONIA, MALTA, MOLDOVA, MONACO, MONTENEGRO, NETHERLANDS,
+                NORWAY, POLAND, PORTUGAL, ROMANIA, RUSSIA, SAN_MARINO, SERBIA, SLOVAKIA, SLOVENIA, SPAIN,
+                SVALBARD_AND_JAN_MAYEN, SWEDEN, SWITZERLAND, UKRAINE, UK, VATICAN_CITY).contains(countryAction)
+                ? EUROPE :
+                Arrays.asList(AFGHANISTAN, ARMENIA, AZERBAIJAN, BAHRAIN, BANGLADESH, BHUTAN,
+                        BRITISH_INDIAN_OCEAN_TERRITORY, BRUNEI, CAMBODIA, CHINA, CHRISTMAS_ISLAND,
+                        COCOS_KEELING_ISLANDS, GEORGIA, HONG_KONG, INDIA, INDONESIA, IRAN, IRAQ, ISRAEL, JAPAN, JORDAN,
+                        KAZAKHSTAN, KUWAIT, KYRGYZSTAN, LAOS, LEBANON, MACAO, MALAYSIA, MALDIVES, MONGOLIA, MYANMAR,
+                        NEPAL, N_KOREA, OMAN, PAKISTAN, PALESTINE, PHILIPPINES, QATAR, SAUDI_ARABIA, SINGAPORE,
+                        S_KOREA, SRI_LANKA, SYRIA, TAIWAN, TAJIKISTAN, THAILAND, TURKEY, TURKMENISTAN, UAE, UZBEKISTAN,
+                        VIETNAM, YEMEN).contains(countryAction)
+                ? ASIA :
+                Arrays.asList(ANGUILLA, ANTIGUA_AND_BARBUDA, ARUBA, BAHAMAS, BARBADOS, BELIZE, BERMUDA,
+                        BONAIRE_SINT_EUSTATIUS_AND_SABA, BRITISH_VIRGIN_ISLANDS, CANADA, CAYMAN_ISLANDS, COSTA_RICA,
+                        CUBA, CURAÇAO, DOMINICA, DOMINICAN_REPUBLIC, EL_SALVADOR, GREENLAND, GRENADA, GUADELOUPE,
+                        GUATEMALA, HAITI, HONDURAS, JAMAICA, MARTINIQUE, MEXICO, MONTSERRAT, NICARAGUA, PANAMA,
+                        PUERTO_RICO, ST_BARTH, SAINT_KITTS_AND_NEVIS, SAINT_LUCIA, SAINT_MARTIN,
+                        SAINT_PIERRE_AND_MIQUELON, ST_VINCENT_GRENADINES, SINT_MAARTEN, TRINIDAD_AND_TOBAGO,
+                        TURKS_AND_CAICOS, US_VIRGIN_ISLANDS, USA).contains(countryAction)
+                ? NORTH_AMERICA :
+                Arrays.asList(ARGENTINA, BOLIVIA, BRAZIL, CHILE, COLOMBIA, ECUADOR, FALKLAND_ISLANDS_MALVINAS,
+                        FRENCH_GUIANA, GUYANA, PARAGUAY, PERU, SURINAME, URUGUAY, VENEZUELA).contains(countryAction)
+                ? SOUTH_AMERICA :
+                Arrays.asList(ALGERIA, ANGOLA, BENIN, BOTSWANA, BURKINA_FASO, BURUNDI, CAMEROON, CABO_VERDE,
+                        CAR, CHAD, COMOROS, DRC, DJIBOUTI, EGYPT, EQUATORIAL_GUINEA, ERITREA, ETHIOPIA, GABON, GAMBIA,
+                        GHANA, GUINEA, GUINEA_BISSAU, IVORY_COAST, KENYA, LESOTHO, LIBERIA, LIBYA, MADAGASCAR, MALAWI,
+                        MALI, MAURITANIA, MAURITIUS, MAYOTTE, MOROCCO, MOZAMBIQUE, NAMIBIA, NIGER, NIGERIA, CONGO,
+                        REUNION, RWANDA, SAINT_HELENA_ASCENSION_AND_TRISTAN_DA_CUNHA, SAO_TOME_AND_PRINCIPE, SENEGAL,
+                        SEYCHELLES, SIERRA_LEONE, SOMALIA, SOUTH_AFRICA, SOUTH_SUDAN, SUDAN, ESWATINI, TANZANIA, TOGO,
+                        TUNISIA, UGANDA, WESTERN_SAHARA, ZAMBIA, ZIMBABWE).contains(countryAction)
+                ? AFRICA :
+                Arrays.asList(AMERICAN_SAMOA, AUSTRALIA, COOK_ISLANDS, TIMOR_LESTE, FIJI, FRENCH_POLYNESIA, GUAM,
+                        KIRIBATI, MARSHALL_ISLANDS, MICRONESIA, NAURU, NEW_CALEDONIA, NEW_ZEALAND, NIUE, NORFOLK_ISLAND,
+                        NORTHERN_MARIANA_ISLANDS, PALAU, PAPUA_NEW_GUINEA, PITCAIRN, SAMOA, SOLOMON_ISLANDS, TOKELAU,
+                        TONGA, TUVALU, UNITED_STATES_MINOR_OUTLYING_ISLANDS, VANUATU, WALLIS_AND_FUTUNA).contains(countryAction)
+                ? AUSTRALIA_AND_OCEANIA
+                : START;
     }
 
     private static String countryNameToResource(String countryName) {

@@ -27,7 +27,7 @@ public class StatsSynchronizer {
     @Autowired
     private StatsHistoryService statsHistoryService;
 
-    @Scheduled(cron = "00 07 * * *")
+    @Scheduled(cron = "0 0 7 * * ?")
     public void schedule() throws UnirestException {
         logger.info("Started Stats Synchronizer.");
         refreshStatsHistory();

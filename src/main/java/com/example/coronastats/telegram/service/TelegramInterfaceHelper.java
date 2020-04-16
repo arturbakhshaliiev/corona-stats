@@ -338,7 +338,7 @@ public class TelegramInterfaceHelper {
 
     public InlineKeyboardMarkup getStartKeyboard(User user) {
         return new InlineKeyboardMarkup().setKeyboard(Arrays.asList(
-                Arrays.asList(getButton("\uD83D\uDC69\uD83C\uDFFB\u200D⚕ " + getRb(user).getString("who_info"), WHO_INFORMATION)),
+                Arrays.asList(getButton("\uD83D\uDC69\uD83C\uDFFB\u200D⚕ " + getRb(user).getString("spread_in_the_world"), SPREAD_IN_THE_WORLD)),
                 Arrays.asList(getButton("\uD83C\uDDFA\uD83C\uDDE6 " + getRb(user).getString("ukraine"), UKRAINE),
                         getButton("\uD83D\uDD14 " + getRb(user).getString("notifications"), NOTIFICATIONS)),
                 Arrays.asList(getButton("\uD83C\uDF0D " + getRb(user).getString("world"), WORLD),

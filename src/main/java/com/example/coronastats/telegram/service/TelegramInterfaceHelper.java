@@ -344,7 +344,7 @@ public class TelegramInterfaceHelper {
                 Arrays.asList(getButton("\uD83C\uDF0D " + getRb(user).getString("world"), WORLD),
                         getButton("\uD83D\uDCF0 " + getRb(user).getString("news"), NEWS),
                         getButton("\uD83E\uDDED " + getRb(user).getString("countries"), COUNTRIES)),
-                Arrays.asList(getButton("\uD83C\uDF10 " + getRb(user).getString("lang"), LANGUAGE),
+                Arrays.asList(getButton("\uD83C\uDF10 " + getRb(user).getString("language"), LANGUAGE),
                         getButton("\uD83D\uDE37 " + getRb(user).getString("quarantine"), QUARANTINE),
                         getButton("ℹ " + getRb(user).getString("about"), ABOUT))));
     }

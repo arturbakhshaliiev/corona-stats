@@ -1,5 +1,6 @@
 package com.example.coronastats.stats.model;
 
+import com.example.coronastats.stats.service.dto.DetailedCountryStats;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,4 +39,15 @@ public class StatsHistory {
     private Long critical;
 
     private Long deaths;
+
+    public static StatsHistory fromDetailedCountryStats(DetailedCountryStats detailedCountryStats) {
+        return StatsHistory.builder()
+                .country(detailedCountryStats.getCountry())
+                .date(new Date())
+                .confirmed(detailedCountryStats.getConfirmed())
+                .recovered(detailedCountryStats.getRecovered())
+                .critical(detailedCountryStats.getCritical())
+                .deaths(detailedCountryStats.getDeaths())
+                .build();
+    }
 }

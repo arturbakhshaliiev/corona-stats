@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 public class DefaultStatsService implements StatsService {
@@ -24,5 +27,12 @@ public class DefaultStatsService implements StatsService {
     @Override
     public DetailedCountryStats getDetailedCountryStats(String countryName) throws UnirestException {
         return DetailedCountryStats.fromCountryStats(statsClient.getCountryStats(countryName));
+    }
+
+    @Override
+    public List<DetailedCountryStats> getAllDetailedCountriesStats() throws UnirestException {
+        return statsClient.getAllCountriesStats().stream()
+                .map(DetailedCountryStats::fromCountryStats)
+                .collect(Collectors.toList());
     }
 }

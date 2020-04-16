@@ -325,6 +325,13 @@ public class TelegramInterfaceHelper {
         ));
     }
 
+    public InlineKeyboardMarkup getSpreadInTheWorld(User user) {
+        return new InlineKeyboardMarkup().setKeyboard(Arrays.asList(
+
+                Arrays.asList(getBackButton(user, START))
+        ));
+    }
+
     private String translate(User user, String actionName) {
         return getRb(user).getString(toResource(actionName));
     }

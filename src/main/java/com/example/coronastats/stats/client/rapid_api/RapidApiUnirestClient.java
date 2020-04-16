@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -56,14 +59,29 @@ public class RapidApiUnirestClient implements StatsClient {
                 .queryString("name", countryName)
                 .asJson().getBody().toString(), RapidApiCountryStatsDto[].class)[0];
 
+        return toCountryStatsDto(countryDto);
+    }
+
+    @Override
+    public List<CountryStatsDto> getAllCountriesStats() throws UnirestException {
+        RapidApiCountryStatsDto[] allCountriesStats =  gson.fromJson(Unirest.get(apiUrl + "/country/all")
+                .header("x-rapidapi-host", apiHost)
+                .header("x-rapidapi-key", apiKey)
+                .queryString("format", "undefined")
+                .asJson().getBody().toString(), RapidApiCountryStatsDto[].class);
+
+        return Arrays.stream(allCountriesStats).map(this::toCountryStatsDto).collect(Collectors.toList());
+    }
+
+    private CountryStatsDto toCountryStatsDto(RapidApiCountryStatsDto rapidApiCountryStatsDto) {
         return CountryStatsDto.builder()
-                .country(countryDto.getCountry())
-                .confirmed(countryDto.getConfirmed())
-                .recovered(countryDto.getRecovered())
-                .critical(countryDto.getCritical())
-                .deaths(countryDto.getDeaths())
-                .latitude(countryDto.getLatitude())
-                .longitude(countryDto.getLongitude())
+                .country(rapidApiCountryStatsDto.getCountry())
+                .confirmed(rapidApiCountryStatsDto.getConfirmed())
+                .recovered(rapidApiCountryStatsDto.getRecovered())
+                .critical(rapidApiCountryStatsDto.getCritical())
+                .deaths(rapidApiCountryStatsDto.getDeaths())
+                .latitude(rapidApiCountryStatsDto.getLatitude())
+                .longitude(rapidApiCountryStatsDto.getLongitude())
                 .build();
     }
 }

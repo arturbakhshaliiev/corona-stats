@@ -2,6 +2,7 @@ package com.example.coronastats.telegram.bot;
 
 
 import com.example.coronastats.common.util.LogUtil;
+import com.example.coronastats.stats.service.StatsHistoryService;
 import com.example.coronastats.stats.service.StatsService;
 import com.example.coronastats.stats.service.StatsUtil;
 import com.example.coronastats.telegram.model.TelegramUser;
@@ -34,6 +35,9 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
 
     @Autowired
     private StatsService statsService;
+
+    @Autowired
+    private StatsHistoryService statsHistoryService;
 
     @Autowired
     private TelegramInterfaceHelper telegramInterfaceHelper;
@@ -94,6 +98,8 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
             africaButtonCallback(update);
         } else if (AUSTRALIA_AND_OCEANIA.equals(query)) {
             australiaAndOceaniaButtonCallback(update);
+        } else if (SPREAD_IN_THE_WORLD.equals(query)) {
+            spreadInTheWorldButtonCallback(update);
         } else if (StatsUtil.isCountry(query)) {
             countryButtonCallback(update);
         } else if (LANGUAGE.equals(query)) {
@@ -182,6 +188,15 @@ public final class CoronaStatsBot extends TelegramLongPollingBot {
         LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
         execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
                 .setText(telegramInterfaceHelper.getRb(user).getString("countries"))
+                .setReplyMarkup(telegramInterfaceHelper.getAustraliaAndOceaniaCountriesKeyboard(user)));
+
+    }
+
+    private void spreadInTheWorldButtonCallback(Update update) throws TelegramApiException {
+        User user = update.getCallbackQuery().getFrom();
+        LogUtil.logAction(logger, user, update.getCallbackQuery().getData());
+        execute(new SendMessage().setChatId(update.getCallbackQuery().getMessage().getChatId())
+                .setText(telegramInterfaceHelper.getRb(user).getString("spread_in_the_world"))
                 .setReplyMarkup(telegramInterfaceHelper.getAustraliaAndOceaniaCountriesKeyboard(user)));
 
     }

@@ -267,6 +267,7 @@ public class Actions {
     public static final String ZIMBABWE = "/zimbabwe";
     public static final String WHO_INFORMATION = "/who-info";
     public static final String NOTIFICATIONS = "/notifications";
+    public static final String SPREAD_IN_THE_WORLD = "/spread-in-the-world";
     public static final String NEWS = "/news";
     public static final String LANGUAGE = "/language";
     public static final String ABOUT = "/about";

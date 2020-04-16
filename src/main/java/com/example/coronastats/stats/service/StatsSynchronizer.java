@@ -27,14 +27,11 @@ public class StatsSynchronizer {
     @Autowired
     private StatsHistoryService statsHistoryService;
 
-    @Value("${stats.refreshInterval:1200000}")
-    private int refreshIntervalMillis;
-
-    @Scheduled(fixedDelayString = "${stats.refreshInterval:1200000}")
+    @Scheduled(cron = "00 07 * * *")
     public void schedule() throws UnirestException {
-        logger.info(String.format("Started Stats Synchronizer. Interval: '%d'", refreshIntervalMillis));
+        logger.info("Started Stats Synchronizer.");
         refreshStatsHistory();
-        logger.info(String.format("Finished Stats Synchronizer. Interval: '%d'", refreshIntervalMillis));
+        logger.info("Finished Stats Synchronizer.");
     }
 
     private void refreshStatsHistory() throws UnirestException {
